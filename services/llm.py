@@ -54,9 +54,27 @@ class LLM:
     client = None
 
     def __init__(self, openai_api_key):
+        """
+        Initialize OpenAI client
+        :param openai_api_key: OpenAI API key
+        """
         self.client = OpenAI(api_key=openai_api_key)
 
     def generate_sql(self, model, database_schema, query):
+        """
+        Call OpenAI client to generate SQL code
+
+        :param model: OpenAI model
+        :param database_schema: Supabase schema as plain text
+        :param query: User's query to explore a database in natural language
+
+        :return: Text representation of SQL query
+        """
+
+        # Prompt provided to OpenAI client containing:
+        # - system prompt as a list of instructions for LLM
+        # - database schema - used by LLM to understand database structure
+        # - user's query
         prompt = f"""
             {system_prompt}
             
@@ -69,6 +87,7 @@ class LLM:
             </query>
         """
 
+        # Call OpenAI client with system and user prompt
         response = self.client.responses.create(
             model=model,
             input=prompt

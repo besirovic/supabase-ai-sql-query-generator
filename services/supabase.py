@@ -8,21 +8,38 @@ class Supabase:
     schema = []
 
     def connect(self, connection_url: str) -> None:
+        """
+        Initialize a connection to the Supabase database
+
+        :param connection_url: Supabase database connection URL
+        :return: None
+        """
+
         if self.engine is None:
             try:
+                # Create PG engine
                 self.engine = create_engine(connection_url, pool_pre_ping=True)
             except Exception as e:
                 raise e
 
     def fetch_schema(self) -> None:
+        """
+        Fetch schema from Supabase database
+
+        :return: None
+        """
         if self.engine is None:
+            # Throw an error if function is called before engine in initialized
             raise NotImplementedError
 
         with self.engine.connect() as conn:
             inspector = inspect(conn)
 
             try:
+                # Fetch all tables in database
                 tables = inspector.get_table_names(schema="public")
+
+                # Construct the simplified list of database tables and columns
                 for table in tables:
                     table_info = {"name": table, "columns": []}
                     columns = inspector.get_columns(table)
@@ -35,9 +52,19 @@ class Supabase:
                 raise RuntimeError
 
     def get_schema_as_json(self) -> list[Any]:
+        """
+        Get schema as JSON
+
+        :return: List of tables
+        """
         return self.schema
 
     def get_schema_as_text(self) -> str:
+        """
+        Get schema as text
+        :return: Database schema as text
+        """
+
         schema_raw = ""
 
         for item in self.schema:

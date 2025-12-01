@@ -12,8 +12,13 @@ def connection_form() -> tuple[bool, str, str]:
             - The third value is an OpenAI API key
     """
     with st.form(key="connection_form"):
+        # Supabase connection link field
         connection_url = st.text_input(label="Enter your Supabase connection link to start")
+
+        # OpenAI API key field
         openai_api_key = st.text_input(label="Enter your OpenAI API key")
+
+        # Submit button
         submitted = st.form_submit_button("Connect to Supabase")
 
     return submitted, connection_url, openai_api_key
