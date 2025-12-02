@@ -41,11 +41,12 @@ def main():
                     # Update session established state
                     st.session_state['session_established'] = True
                 except Exception as e:
+                    print("Error:", e)
                     # Display a message in case of error
                     st.error('Could not connect to Supabase')
 
                 if st.session_state['session_established']:
-                    # If session is established, rerun Streamlit to update the UI
+                    # If the session is established, rerun Streamlit to update the UI
                     st.rerun()
 
     else:
@@ -93,6 +94,7 @@ def main():
                             # Rerun Streamlit to update UI
                             st.rerun()
                         except Exception as e:
+                            print("Error:", e)
                             # Display an error in case SQL code generation fails
                             st.error('Could not generate SQL')
             # If SQL code is generated, display the code
@@ -100,7 +102,7 @@ def main():
                 st.write("### Here is your SQL query")
                 st.code(st.session_state.sql, language="sql")
 
-                # Go over button to reset form
+                # Go over button to reset the form
                 go_over = st.button('Go over')
                 if go_over:
                     st.session_state['query_submitted'] = False
