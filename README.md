@@ -2,6 +2,9 @@
 
 Generate SQL queries from your Supabase database just by using natural language.
 
+Try the live version on:
+[http://supabase-ai-sql-query-generator.up.railway.app](http://supabase-ai-sql-query-generator.up.railway.app)
+
 ### How it works
 
 1. You enter your Supabase Postgress connection link and OpenAI API key
