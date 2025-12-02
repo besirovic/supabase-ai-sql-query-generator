@@ -100,6 +100,7 @@ def main():
             # If SQL code is generated, display the code
             else:
                 st.write("### Here is your SQL query")
+                st.warning("For your own safety, make sure to validate SQL code before executing it")
                 st.code(st.session_state.sql, language="sql")
 
                 # Go over button to reset the form

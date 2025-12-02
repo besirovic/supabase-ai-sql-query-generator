@@ -12,6 +12,8 @@ def connection_form() -> tuple[bool, str, str]:
             - The third value is an OpenAI API key
     """
     with st.form(key="connection_form"):
+        st.info(f"Supabase connection link and OpenAI API key are never stored anywhere. \n\n Feel safe to use the app")
+
         # Supabase connection link field
         connection_url = st.text_input(label="Enter your Supabase connection link to start")
 
