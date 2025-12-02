@@ -115,6 +115,8 @@ def main():
             schema_explorer(schema_text, schema_json)
 
     st.info("Check out source code on https://github.com/besirovic/supabase-ai-sql-query-generator")
+    st.write("Made by [Ademir Besirovic](https://github.com/besirovic)")
+
 
 if __name__ == "__main__":
     main()
